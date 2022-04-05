@@ -12,14 +12,21 @@ const Work = () => {
   const [animateCard, setAnimateCard] = useState({y:0,opacity:1})
   const [works, setWorks] = useState([]);
   const [filterWork, setFilterWork] = useState([])
+  const [tags, setTags] = useState([])
   
   useEffect(() => {
     const query = '*[_type == "works"]';
+    const query2 = '*[_type == "portfoliotag"]';
 
     client.fetch(query)
     .then((data) => {
       setWorks(data);
       setFilterWork(data);
+    })
+    client.fetch(query2)
+    .then((data) => {
+      console.log(data)
+      setTags(data);
     })
   }, [])
   
@@ -45,15 +52,21 @@ const Work = () => {
       </h2>
 
       <div className="app__work-filter">
-        {['UI/UX','Web App','Mobile App','React JS','All'].map((item,index)=>(
+        {tags.map((item,index)=>(
           <div
           key={index}
-          onClick={()=> handleWorkFilter(item)}
-          className={`app__work-filter-item app__flex p-text ${activeFilter === item ? 'item-active' : ''}`}
+          onClick={()=> handleWorkFilter(item.title)}
+          className={`app__work-filter-item app__flex p-text ${activeFilter === item.title ? 'item-active' : ''}`}
           >
-            {item}
+            {item.title}
           </div>
         ))}
+        <div
+          onClick={()=> handleWorkFilter("All")}
+          className={`app__work-filter-item app__flex p-text ${activeFilter === 'All' ? 'item-active' : ''}`}
+          >
+            All
+          </div>
       </div>
       <motion.div
       animate={animateCard}

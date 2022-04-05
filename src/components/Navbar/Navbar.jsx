@@ -4,13 +4,14 @@ import './Navbar.scss';
 import {images} from '../../constants';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
+import logo from '../../assets/logo.svg';
 
 const Navbar = () => {
   const [Toggle, setToggle] = useState(false);
   return (
     <nav className='app__navbar'>
       <div className='app__navbar-logo'>
-        <img src={images.logo} alt="logo" />
+        <img src={logo} alt="logo" />
       </div>
       <ul className='app__navbar-links'>
         {['home','about','work','skills','testimonials','contact'].map((item)=>

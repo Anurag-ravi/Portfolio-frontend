@@ -4,6 +4,7 @@ import './Header.scss';
 import {motion} from 'framer-motion';
 import {images} from '../../constants';
 import AppWrap from '../../wrapper/AppWrap';
+import MotionWrap from '../../wrapper/MotionWrap';
 
 const scaleVariants = {
   whileInView: {
@@ -60,7 +61,7 @@ const Header = () => {
       whileInView={scaleVariants.whileInView}
       className="app__header-circles"
       >
-        {[images.cpp,images.react,images.python].map((circle,index)=>
+        {[images.django,images.react,images.cpp].map((circle,index)=>
         <div className='circle-cmp app__flex' key={`circle-${index}`}>
           <img src={circle} alt="circle" />
         </div>
@@ -70,4 +71,8 @@ const Header = () => {
   )
 }
 
-export default AppWrap(Header,'home')
+export default AppWrap(
+  MotionWrap(Header,'app__header'),
+  'home',
+  ''
+  );
